@@ -12,7 +12,9 @@ public class CircleGrowth : MonoBehaviour
     public int scanned = 0;
     public int missScan = 0;
 
+    private bool hasScored = false;
     private bool canScore = false;
+    private bool hasMissed = false;
     public VisualFeedback visualFeedback;
 
     private SpriteRenderer innerCircleRenderer; 
@@ -40,12 +42,13 @@ public class CircleGrowth : MonoBehaviour
             innerCircle.localScale += Vector3.one * growSpeed * Time.deltaTime;
             canScore = true;
         }
-        else
+        else if (!hasMissed && !hasScored)
         {
             missScan++;
+            hasMissed = true;
             Debug.Log("Too Slow");
             visualFeedback.ShowMiss();
-            ResetCircle();
+            StartCoroutine(DelayedResetCircle());
         }
 
         if(Input.GetKeyDown(KeyCode.Space) && canScore)
@@ -54,19 +57,26 @@ public class CircleGrowth : MonoBehaviour
             if(distance <= perfectRange)
             {
                 scanned++;
+                hasScored = true;
                 Debug.Log("Perfect");
             }
             else
             {
                 missScan++;
+                hasMissed = true;
                 Debug.Log("Too Fast!");
                 visualFeedback.ShowMiss();
             }
 
-            ResetCircle();
+            StartCoroutine(DelayedResetCircle());
         }
     }
 
+    IEnumerator DelayedResetCircle()
+    {
+        yield return new WaitForSeconds(0.1f); // Wait before resetting, adjust delay as needed
+        ResetCircle();
+    }
     void ResetCircle()
     {
         StopAllCoroutines();
@@ -80,6 +90,8 @@ public class CircleGrowth : MonoBehaviour
 
         innerCircle.localScale = Vector3.one * 0.1f;
         canScore = false;
+        hasMissed = false;
+        hasScored = false;
         visualFeedback.outerRenderer.material.color = visualFeedback.normalColor;
 
         StartCoroutine(FadeInInnerCircle());

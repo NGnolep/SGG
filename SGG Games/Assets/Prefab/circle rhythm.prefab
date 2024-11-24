@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 1617021113065868739}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.4705698, y: -0.3448586, z: -0.055564027}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -73,8 +73,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 0}
+  m_Sprite: {fileID: -34213928, guid: da878e6ea71c8bb4982d3ac7568d6682, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -111,8 +111,8 @@ Transform:
   m_GameObject: {fileID: 6695242620186768338}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.4505699, y: -0.35485858, z: -0.055564027}
-  m_LocalScale: {x: 4, y: 4, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6618858988580384194}
@@ -157,13 +157,13 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 647894047, guid: 990cda2d1da28d54ea3867404b9c10d0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 8.13, y: 8.14}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -187,7 +187,7 @@ MonoBehaviour:
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   hitColor: {r: 0, g: 1, b: 0, a: 1}
   missColor: {r: 1, g: 0, b: 0, a: 1}
-  hitRange: 0.5
+  hitRange: 0.3
 --- !u!1 &7206914438674313693
 GameObject:
   m_ObjectHideFlags: 0
@@ -214,7 +214,7 @@ Transform:
   m_GameObject: {fileID: 7206914438674313693}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.5605698, y: 0.7848586, z: 0.055564027}
+  m_LocalPosition: {x: 0.01, y: -0.06, z: 0.055564027}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -236,9 +236,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   innerCircle: {fileID: 7031607478625220395}
   outerCircle: {fileID: 115001741441712988}
-  growSpeed: 2.5
-  perfectRange: 0.5
+  growSpeed: 1.2
+  perfectRange: 0.2
   maxScaleThreshold: 1.1
-  score: 0
+  scanned: 0
+  missScan: 0
   visualFeedback: {fileID: 5807390181118145140}
-  fadeInDuration: 1.5
+  fadeInDuration: 0.8
