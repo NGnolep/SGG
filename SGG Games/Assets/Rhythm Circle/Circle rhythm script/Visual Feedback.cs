@@ -11,7 +11,7 @@ public class VisualFeedback : MonoBehaviour
     public Color normalColor = Color.white;
     public Color hitColor = Color.green;
     public Color missColor = Color.red;
-    public float hitRange = 0.5f;
+    public float hitRange = 0.29f;
 
     private bool isMiss = false;
     void Start()

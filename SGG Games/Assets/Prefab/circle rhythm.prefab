@@ -187,7 +187,7 @@ MonoBehaviour:
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   hitColor: {r: 0, g: 1, b: 0, a: 1}
   missColor: {r: 1, g: 0, b: 0, a: 1}
-  hitRange: 0.3
+  hitRange: 0.29
 --- !u!1 &7206914438674313693
 GameObject:
   m_ObjectHideFlags: 0
@@ -236,8 +236,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   innerCircle: {fileID: 7031607478625220395}
   outerCircle: {fileID: 115001741441712988}
-  growSpeed: 1.2
-  perfectRange: 0.2
+  growSpeed: 1
+  perfectRange: 0.29
   maxScaleThreshold: 1.1
   scanned: 0
   missScan: 0

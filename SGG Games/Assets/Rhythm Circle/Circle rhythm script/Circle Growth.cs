@@ -4,21 +4,29 @@ using UnityEngine;
 
 public class CircleGrowth : MonoBehaviour
 {
+    [Header("Circle Reference")]
     public Transform innerCircle;
     public Transform outerCircle;
-    public float growSpeed = 2f;
-    public float perfectRange = 0.5f;
+
+    [Header("Circle Settings")]
+    public float growSpeed = 0.8f;
+    public float perfectRange = 0.29f;
     public float maxScaleThreshold = 1.1f;
+
+    [Header("Scoring")]
     public int scanned = 0;
     public int missScan = 0;
 
     private bool hasScored = false;
     private bool canScore = false;
     private bool hasMissed = false;
-    public VisualFeedback visualFeedback;
 
+    [Header("Feedback")]
+    public VisualFeedback visualFeedback;
     private SpriteRenderer innerCircleRenderer; 
-    public float fadeInDuration = 3.5f;
+    public float fadeInDuration = 1f;
+
+    public RadarController scanningManager;
     void Start()
     {
         innerCircleRenderer = innerCircle.GetComponent<SpriteRenderer>();
@@ -44,34 +52,52 @@ public class CircleGrowth : MonoBehaviour
         }
         else if (!hasMissed && !hasScored)
         {
-            missScan++;
-            hasMissed = true;
-            Debug.Log("Too Slow");
-            visualFeedback.ShowMiss();
-            StartCoroutine(DelayedResetCircle());
+            HandleMiss("Too Slow");
         }
 
-        if(Input.GetKeyDown(KeyCode.Space) && canScore)
+        if(Input.GetKeyDown(KeyCode.Space) && canScore && !hasMissed)
         {
-            float distance = Mathf.Abs(innerCircle.localScale.x - outerCircle.localScale.x);
-            if(distance <= perfectRange)
-            {
-                scanned++;
-                hasScored = true;
-                Debug.Log("Perfect");
-            }
-            else
-            {
-                missScan++;
-                hasMissed = true;
-                Debug.Log("Too Fast!");
-                visualFeedback.ShowMiss();
-            }
-
-            StartCoroutine(DelayedResetCircle());
+            CheckForScore();
+            
         }
     }
 
+    private void CheckForScore()
+    {
+        float distance = Mathf.Abs(innerCircle.localScale.x - outerCircle.localScale.x);
+        if (distance <= perfectRange)
+        {
+            scanned++;
+            hasScored = true;
+            Debug.Log("Perfect");
+            if (scanned >= 10)
+            {
+                scanningManager.CollectFishData(); 
+                scanned = 0; 
+            }
+        }
+        else
+        {
+            HandleMiss("Too Fast!");
+        }
+
+        StartCoroutine(DelayedResetCircle());
+    }
+
+    private void HandleMiss(string message)
+    {
+        missScan++;
+        hasMissed = true;
+        Debug.Log(message);
+        if (missScan >= 5)
+        {
+            scanningManager.OnMissedScan(); 
+            missScan = 0; 
+        }
+
+        visualFeedback.ShowMiss(); 
+        StartCoroutine(DelayedResetCircle());
+    }
     IEnumerator DelayedResetCircle()
     {
         yield return new WaitForSeconds(0.1f); // Wait before resetting, adjust delay as needed
