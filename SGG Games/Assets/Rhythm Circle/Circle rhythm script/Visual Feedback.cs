@@ -49,4 +49,9 @@ public class VisualFeedback : MonoBehaviour
         yield return new WaitForSeconds(0.1f); // Adjust delay as needed
         isMiss = false;
     }
+    public void ResetFeedback()
+    {
+        isMiss = false;
+        outerRenderer.material.color = normalColor; // Reset the color to normal
+    }
 }

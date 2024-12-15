@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
 
 public class CircleGrowth : MonoBehaviour
 {
@@ -20,31 +19,28 @@ public class CircleGrowth : MonoBehaviour
     private bool hasScored = false;
     private bool canScore = false;
     private bool hasMissed = false;
+    private bool isGameOver = false;
+    private bool isActive = false; // To control when the script starts/stops
 
     [Header("Feedback")]
     public VisualFeedback visualFeedback;
-    private SpriteRenderer innerCircleRenderer; 
+    private SpriteRenderer innerCircleRenderer;
     public float fadeInDuration = 1f;
 
     public RadarController scanningManager;
+    public EncyclopediaManager encyclopediaManager;
+
     void Start()
     {
         innerCircleRenderer = innerCircle.GetComponent<SpriteRenderer>();
-        if (innerCircleRenderer != null)
-        {
-            // Start with the inner circle fully transparent
-            Color startColor = innerCircleRenderer.color;
-            startColor.a = 0;
-            innerCircleRenderer.color = startColor;
-
-            // Start the fade-in coroutine
-            StartCoroutine(FadeInInnerCircle());
-        }
+        ResetCircle();
+        StopAllCoroutines(); // Prevent anything from starting until explicitly told to
     }
 
-    // Update is called once per frame
     void Update()
     {
+        if (!isActive || isGameOver) return; // Ensure the script only runs when active
+
         if (innerCircle.localScale.x < outerCircle.localScale.x)
         {
             innerCircle.localScale += Vector3.one * growSpeed * Time.deltaTime;
@@ -55,11 +51,33 @@ public class CircleGrowth : MonoBehaviour
             HandleMiss("Too Slow");
         }
 
-        if(Input.GetKeyDown(KeyCode.Space) && canScore && !hasMissed)
+        if (Input.GetKeyDown(KeyCode.Space) && canScore && !hasMissed)
         {
             CheckForScore();
-            
         }
+    }
+
+    public void StartRhythm()
+    {
+        if (isActive) return; // Prevent multiple starts
+
+        isActive = true;
+        isGameOver = false;
+        ResetCircle();
+
+        if (innerCircleRenderer != null)
+        {
+            StartCoroutine(FadeInInnerCircle());
+        }
+    }
+
+    public void StopRhythm()
+    {
+        scanned = 0;
+        missScan = 0;
+        isActive = false;
+        StopAllCoroutines();
+        ResetCircle(); // Reset the circle when stopping
     }
 
     private void CheckForScore()
@@ -72,8 +90,8 @@ public class CircleGrowth : MonoBehaviour
             Debug.Log("Perfect");
             if (scanned >= 10)
             {
-                scanningManager.CollectFishData(); 
-                scanned = 0; 
+                scanningManager.RhythmComplete();
+                StopRhythm(); // Stop the rhythm game when the goal is reached
             }
         }
         else
@@ -81,7 +99,7 @@ public class CircleGrowth : MonoBehaviour
             HandleMiss("Too Fast!");
         }
 
-        StartCoroutine(DelayedResetCircle());
+        ResetCircle();
     }
 
     private void HandleMiss(string message)
@@ -89,20 +107,18 @@ public class CircleGrowth : MonoBehaviour
         missScan++;
         hasMissed = true;
         Debug.Log(message);
+
+        ResetCircle();
+        visualFeedback.ShowMiss();
+
         if (missScan >= 5)
         {
-            scanningManager.OnMissedScan(); 
-            missScan = 0; 
+            isGameOver = true;
+            scanningManager.OnMissedScan();
+            StopRhythm(); // Stop the rhythm game when too many misses occur
         }
+    }
 
-        visualFeedback.ShowMiss(); 
-        StartCoroutine(DelayedResetCircle());
-    }
-    IEnumerator DelayedResetCircle()
-    {
-        yield return new WaitForSeconds(0.1f); // Wait before resetting, adjust delay as needed
-        ResetCircle();
-    }
     void ResetCircle()
     {
         StopAllCoroutines();
@@ -110,24 +126,29 @@ public class CircleGrowth : MonoBehaviour
         if (innerCircleRenderer != null)
         {
             Color resetColor = innerCircleRenderer.color;
-            resetColor.a = 0; // Fully transparent
+            resetColor.a = 1; // Fully transparent
             innerCircleRenderer.color = resetColor;
         }
 
         innerCircle.localScale = Vector3.one * 0.1f;
+
         canScore = false;
         hasMissed = false;
         hasScored = false;
         visualFeedback.outerRenderer.material.color = visualFeedback.normalColor;
-
-        StartCoroutine(FadeInInnerCircle());
+        StartCoroutine(StartGrowthDelay());
     }
-
+    IEnumerator StartGrowthDelay()
+    {
+        yield return new WaitForSeconds(0.5f); // Small delay before resuming growth
+        canScore = true; // Allow scoring again
+    }
     IEnumerator FadeInInnerCircle()
     {
         Color startColor = innerCircleRenderer.color;
         startColor.a = 0; // Start fully transparent
         innerCircleRenderer.color = startColor;
+
         Color targetColor = startColor;
         targetColor.a = 1; // Fully visible
         float elapsedTime = 0f;
@@ -139,7 +160,6 @@ public class CircleGrowth : MonoBehaviour
             yield return null;
         }
 
-        // Ensure the final alpha is fully visible
-        innerCircleRenderer.color = targetColor;
+        innerCircleRenderer.color = targetColor; // Ensure it's fully visible
     }
 }
