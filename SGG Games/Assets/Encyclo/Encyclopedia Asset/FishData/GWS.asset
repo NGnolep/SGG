@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b12b2b5d65bcaa40a83530a7a44c478, type: 3}
+  m_Name: GWS
+  m_EditorClassIdentifier: 
+  fishName: Great White Shark
+  fishDescription: 'Scientific Name: Carcharodon carcharias Diet: Carnivore  Lifespan:
+    >70 years Class: Chondrichthyes.'
+  fishImage: {fileID: 423651318, guid: 220abd493381b6a4d80c65d5ed350d53, type: 3}
+  fishFacts:
+  - title: Built for Long-Distance Travel
+    description: Great White Sharks are known for their impressive migration abilities,
+      sometimes covering thousands of miles. They can travel vast distances, such
+      as from South Africa to Australia and back, following seasonal patterns for
+      hunting and breeding.
+  - title: Temperature Regulation
+    description: Unlike most fish, Great Whites are endothermic, meaning they can
+      maintain a warmer body temperature than the surrounding water. This adaptation
+      helps them hunt in colder waters, giving them an edge over other marine predators.
+  - title: Powerful Bite Force
+    description: Great Whites have one of the most powerful bite forces among sharks,
+      estimated to be between 4,000 and 4,200 pounds per square inch (PSI). Their
+      serrated teeth and strong jaws make them incredibly effective hunters.
+  - title: A Sixth Sense
+    description: "Great Whites use special organs called ampullae of Lorenzini to
+      detect electrical signals from other animals. This sense helps them locate
+      prey even when it\u2019s hidden, allowing them to detect even the faintest
+      heartbeat of a nearby animal."
+  - title: Unique Hunting Technique
+    description: They often launch themselves upward in powerful, surprise attacks
+      to catch seals and other prey, a hunting behavior called breaching. This involves
+      the shark propelling itself partially or fully out of the water, which is both
+      effective and visually dramatic!
+  dataUnlocked: 0000000000

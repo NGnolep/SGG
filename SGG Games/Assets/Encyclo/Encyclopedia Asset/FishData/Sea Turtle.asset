@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b12b2b5d65bcaa40a83530a7a44c478, type: 3}
+  m_Name: Sea Turtle
+  m_EditorClassIdentifier: 
+  fishName: Sea Turtle
+  fishDescription: 'Scientific Name: Chelonioidea Diet: Herbivores Lifespan: 50-100
+    years Class: Reptiles'
+  fishImage: {fileID: -543217142, guid: d337a6a9681dee742a492517e8dc79c3, type: 3}
+  fishFacts:
+  - title: Ancient Lineage
+    description: "Sea turtles have been around for more than 100 million years, meaning
+      they coexisted with dinosaurs. They\u2019re among the most ancient reptiles
+      still alive today, surviving multiple extinction events and adapting over millions
+      of years."
+  - title: 'Long Migration Patterns '
+    description: Sea turtles are known for their long-distance migrations, traveling
+      thousands of miles between feeding grounds and nesting beaches. Some species,
+      like the leatherback, can cross entire oceans to reach their preferred nesting
+      spots.
+  - title: Navigation by Magnetic Field
+    description: "Sea turtles have a remarkable ability to navigate using Earth\u2019s
+      magnetic field. They can sense the unique magnetic signatures of different
+      coastal areas, which helps them return to the exact beach where they were born
+      to lay their own eggs."
+  - title: Temperature-Dependent Gender
+    description: The temperature of the sand where sea turtle eggs are incubated
+      determines the gender of the hatchlings. Warmer sand tends to produce more
+      females, while cooler sand produces more males, a phenomenon known as temperature-dependent
+      sex determination.
+  - title: Respiration Adaptation
+    description: Although sea turtles need to surface to breathe air, they can hold
+      their breath for several hours while resting. They have specialized muscles
+      and blood chemistry that allow them to conserve oxygen efficiently during long
+      dives, especially when inactive.
+  dataUnlocked: 0000000000

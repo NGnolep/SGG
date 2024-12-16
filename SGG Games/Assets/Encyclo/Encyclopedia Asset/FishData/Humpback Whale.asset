@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b12b2b5d65bcaa40a83530a7a44c478, type: 3}
+  m_Name: Humpback Whale
+  m_EditorClassIdentifier: 
+  fishName: Humpback Whale
+  fishDescription: "Scientific Name: Megaptera novaeangliae Diet: Carnivore Lifespan:
+    80 \u2013 90 years Class: Mammal"
+  fishImage: {fileID: -1773863163, guid: 28a5ff359e0835c4aa5f6c625f0327a2, type: 3}
+  fishFacts:
+  - title: Complex Songs
+    description: Male humpback whales are known for their intricate songs, which
+      can last up to 20 minutes and are often repeated for hours. These songs are
+      believed to play a role in mating, and all males in a particular region sing
+      a similar version that gradually changes over time.
+  - title: Remarkable Migration
+    description: Humpback whales undertake one of the longest migrations of any mammal,
+      traveling up to 16,000 miles (25,000 kilometers) each year between feeding
+      grounds in polar regions and breeding grounds in tropical or subtropical waters.
+  - title: Acrobatic Abilities
+    description: Humpbacks are known for their acrobatic behavior, such as breaching
+      (leaping out of the water), tail-slapping, and flipper-slapping. These displays
+      are thought to be a form of communication, play, or a way to dislodge parasites.
+  - title: Bubble-Net Feeding
+    description: Humpbacks have a unique feeding technique called bubble-net feeding,
+      where a group of whales works together to blow bubbles in a circle around a
+      school of fish, creating a "net" that traps the fish and makes them easier
+      to catch.
+  - title: Long Pectoral Fins
+    description: Humpbacks have the longest pectoral fins of any whale species, reaching
+      up to 16 feet (5 meters) in length. These fins help with maneuverability and
+      stability, and their scientific name, Megaptera, means "big-winged" in reference
+      to these impressive fins.
+  dataUnlocked: 0000000000

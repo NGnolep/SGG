@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b12b2b5d65bcaa40a83530a7a44c478, type: 3}
+  m_Name: GiantSquid
+  m_EditorClassIdentifier: 
+  fishName: Giant Squid
+  fishDescription: 'Scientific Name: Architeuthis Diet: Carnivore Lifespan: 5-6 years
+    Class: Cephalopod'
+  fishImage: {fileID: 0}
+  fishFacts:
+  - title: Massive Size
+    description: Giant squids can grow up to 40-50 feet (12-15 meters) in length,
+      making them one of the largest invertebrates on Earth. Their eyes alone are
+      about the size of a soccer ball, which helps them see in the dark depths of
+      the ocean.
+  - title: Elusive Nature
+    description: Despite their size, giant squids are rarely seen alive. They live
+      at depths of around 300-1,000 meters (1,000-3,280 feet), making them hard to
+      study. Most of what we know comes from carcasses washed up on shore or caught
+      in deep-sea fishing nets.
+  - title: Powerful Tentacles and Hooks
+    description: They have eight arms and two longer tentacles equipped with hundreds
+      of suction cups lined with sharp hooks. These hooks help them latch onto prey
+      with an incredibly strong grip, making escape nearly impossible.
+  - title: Jet Propulsion
+    description: Giant squids use jet propulsion to move through the water. They
+      suck water into a cavity in their mantle (main body) and force it out through
+      a funnel, enabling them to move swiftly, especially when they need to evade
+      predators like sperm whales.
+  - title: Mysterious Hunting Tactics
+    description: "Little is known about their hunting strategies, but it\u2019s believed
+      they ambush prey in the deep ocean, relying on their large eyes to spot bioluminescent
+      creatures like fish and smaller squids in the near-total darkness."
+  dataUnlocked: 0000000000

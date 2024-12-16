@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b12b2b5d65bcaa40a83530a7a44c478, type: 3}
+  m_Name: Vampire squid
+  m_EditorClassIdentifier: 
+  fishName: Vampire squid
+  fishDescription: 'Scientific Name: Vampyroteuthis infernalis Diet: Detritivore
+    Lifespan: 8 years (approximate) Class: Cephalopoda'
+  fishImage: {fileID: 0}
+  fishFacts:
+  - title: Not a True Squid or Octopus
+    description: Despite its name, the vampire squid is neither a true squid nor
+      an octopus. It belongs to its own order, Vampyromorphida, and is considered
+      a "living fossil," meaning it has remained relatively unchanged for millions
+      of years.
+  - title: Lives in the Oxygen Minimum Zone
+    description: "Vampire squids thrive in deep-sea habitats between 2,000\u20133,000
+      feet (600\u2013900 meters), where oxygen levels are extremely low (less than
+      5%). They have adapted to survive in these harsh conditions with specialized
+      hemocyanin in their blood for efficient oxygen transport. "
+  - title: Unique Defense Mechanism
+    description: Instead of ink, vampire squids eject a cloud of bioluminescent mucus
+      filled with glowing particles when threatened. This startles predators and
+      gives the squid time to escape.
+  - title: '"Inside-Out" Appearance'
+    description: When frightened, vampire squids invert their webbed arms over their
+      bodies, displaying spiny projections that give them a menacing look. This behavior,
+      known as "pineapple posture," is designed to deter predators.
+  - title: Diet of Marine Snow
+    description: Unlike many cephalopods, vampire squids don't actively hunt large
+      prey. They feed on "marine snow," a mix of organic debris, dead plankton, and
+      fecal matter that sinks from the ocean's surface. They use specialized filaments
+      to collect these particles efficiently.
+  dataUnlocked: 0000000000

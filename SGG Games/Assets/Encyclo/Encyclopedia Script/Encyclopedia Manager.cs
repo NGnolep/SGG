@@ -1,120 +1,75 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+
 public class EncyclopediaManager : MonoBehaviour
 {
-    public FishData[] fishDataList;
-    public TMP_Text fishNameText;     
-    public TMP_Text fishDescriptionText;  
-    public TMP_Text fishFactsText;   
-    public Button[] factButtons;    
-    public Button nextButton;        
-    public Button prevButton;        
-    public Button closeButton;
+    [Header("Fish Data")]
+    public FishDataScriptableObject[] fishDataList; // Array of fish ScriptableObjects
 
+    [Header("UI Elements")]
+    public TMP_Text fishNameText;
+    public TMP_Text fishDescriptionText;
+    public TMP_Text fishFactsText;  // Display for fact title and description
+    public Button[] factButtons;    // Buttons for fish facts
+    public Button nextButton;
+    public Button prevButton;
+    public Button closeButton;
     public Image fishImage;
 
     private int currentFishIndex = 0;
-    private int collectedData = 0;
 
     void Start()
     {
-        InitializeFishData();
-        UpdateEncyclopediaUI();
-
+        // Set up button listeners
         nextButton.onClick.AddListener(NextFish);
         prevButton.onClick.AddListener(PrevFish);
         closeButton.onClick.AddListener(CloseEncyclopedia);
 
-        foreach (Button button in factButtons)
+        for (int i = 0; i < factButtons.Length; i++)
         {
-            int index = System.Array.IndexOf(factButtons, button);
-            button.onClick.RemoveAllListeners();
-            button.onClick.AddListener(() => OnFactButtonPressed(index));
-            button.interactable = false;
+            int index = i; // Prevent closure issue
+            factButtons[i].onClick.AddListener(() => OnFactButtonPressed(index));
         }
-    }
 
-    private void InitializeFishData()
-    {
-        for (int i = 0; i < fishDataList.Length; i++)
-        {
-            fishDataList[i] = new FishData(5);
-            fishDataList[i].fishName = "Fish " + (i + 1);
-            fishDataList[i].fishDescription = "Description of Fish " + (i + 1);
-            for (int j = 0; j < 5; j++)
-            {
-                fishDataList[i].fishFacts[j] = $"Fact {j + 1} about Fish {i + 1}";
-            }
-        }
-    }
-
-    public void CollectFishData()
-    {
-        if (collectedData < 5)
-        {
-            fishDataList[currentFishIndex].dataUnlocked[collectedData] = true;
-            factButtons[collectedData].interactable = true;
-            collectedData++;
-
-            if (collectedData == 5)
-            {
-                Debug.Log($"All data unlocked for {fishDataList[currentFishIndex].fishName}!");
-
-                if (currentFishIndex < fishDataList.Length - 1)
-                {
-                    currentFishIndex++;
-                    collectedData = 0;
-                    UpdateEncyclopediaUI();
-                }
-                else
-                {
-                    Debug.Log("All fish data unlocked! Game Complete!");
-                }
-            }
-        }
+        UpdateEncyclopediaUI();
     }
 
     private void UpdateEncyclopediaUI()
     {
-        if (currentFishIndex < fishDataList.Length)
+        if (currentFishIndex >= 0 && currentFishIndex < fishDataList.Length)
         {
-            FishData currentFish = fishDataList[currentFishIndex];
+            FishDataScriptableObject currentFish = fishDataList[currentFishIndex];
 
-            // Update text fields
+            // Update fish name, description, and image
             fishNameText.text = currentFish.fishName;
             fishDescriptionText.text = currentFish.fishDescription;
+            fishImage.sprite = currentFish.fishImage;
 
-            if (fishImage != null)
-            {
-                fishImage.sprite = currentFish.fishImage; // Update the image
-            }
-            // Enable fact buttons that are unlocked
+            bool anyFactsUnlocked = false;
+
+            // Update fact buttons based on unlock state
             for (int i = 0; i < factButtons.Length; i++)
             {
                 if (i < currentFish.fishFacts.Length && currentFish.dataUnlocked[i])
                 {
                     factButtons[i].interactable = true;
-                    factButtons[i].onClick.RemoveAllListeners();
-                    int factIndex = i;
-                    factButtons[i].onClick.AddListener(() => OnFactButtonPressed(factIndex));
+                    anyFactsUnlocked = true;
                 }
                 else
                 {
-                    factButtons[i].interactable = false;  // Disable if not unlocked
+                    factButtons[i].interactable = false;
                 }
             }
 
-            // Disable Prev button if we're at the first fish
+            // Update navigation buttons
             prevButton.interactable = currentFishIndex > 0;
-
-            // Disable Next button if we're at the last fish
             nextButton.interactable = currentFishIndex < fishDataList.Length - 1;
+
+            // Update facts display text
+            fishFactsText.text = anyFactsUnlocked ? "Press a fact button" : "???";
         }
     }
-
 
     private void NextFish()
     {
@@ -125,7 +80,6 @@ public class EncyclopediaManager : MonoBehaviour
         }
     }
 
-    // Go to the previous fish in the list
     private void PrevFish()
     {
         if (currentFishIndex > 0)
@@ -135,19 +89,31 @@ public class EncyclopediaManager : MonoBehaviour
         }
     }
 
-    // Close the encyclopedia UI
     private void CloseEncyclopedia()
     {
         gameObject.SetActive(false); // Deactivate the encyclopedia panel
     }
 
-    // Handle fact button press and show the fact in the UI
-    public void OnFactButtonPressed(int index)
+    private void OnFactButtonPressed(int index)
     {
-        if (index >= 0 && index < fishDataList[currentFishIndex].fishFacts.Length)
+        FishDataScriptableObject currentFish = fishDataList[currentFishIndex];
+        if (index >= 0 && index < currentFish.fishFacts.Length && currentFish.dataUnlocked[index])
         {
-            string fact = fishDataList[currentFishIndex].fishFacts[index];
-            fishFactsText.text = fact; // Show the fact
+            string title = currentFish.fishFacts[index].title;
+            string description = currentFish.fishFacts[index].description;
+
+            fishFactsText.text = $"<b>{title}</b>\n{description}";
+        }
+    }
+
+    // Unlock a new fact for the current fish
+    public void UnlockFact(int factIndex)
+    {
+        FishDataScriptableObject currentFish = fishDataList[currentFishIndex];
+        if (factIndex >= 0 && factIndex < currentFish.dataUnlocked.Length)
+        {
+            currentFish.dataUnlocked[factIndex] = true;
+            UpdateEncyclopediaUI();
         }
     }
 }

@@ -4,6 +4,7 @@ using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainMenuBlinker : MonoBehaviour
 {
@@ -12,6 +13,12 @@ public class MainMenuBlinker : MonoBehaviour
     public GameObject startText;
     public GameObject mainMenu;
     public GameObject startMenu;
+
+    public Button start;
+    public Button tutorial;
+    public Button setting;
+    public Button quit;
+
     private CanvasGroup textCanvasGroup;
     private bool isBlinking = true;
     // Start is called before the first frame update
@@ -66,18 +73,16 @@ public class MainMenuBlinker : MonoBehaviour
     {
         isBlinking = false;
 
-        //textCanvasGroup.alpha = 1;
+        textCanvasGroup.alpha = 1;
 
-        //if(mainMenu != null)
-        //{
-        //    mainMenu.SetActive(true);
-        //}
+        if(mainMenu != null)
+        {
+            mainMenu.SetActive(true);
+        }
 
-        //if(startText != null)
-        //{
-        //    startMenu.SetActive(false);
-        //}
-
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        if(startText != null)
+        {
+            startMenu.SetActive(false);
+        }
     }
 }

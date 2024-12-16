@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b12b2b5d65bcaa40a83530a7a44c478, type: 3}
+  m_Name: Coelacanth
+  m_EditorClassIdentifier: 
+  fishName: 'Coelacanth '
+  fishDescription: 'Scientific Name: Latimeria chalumnae (West Indian Ocean coelacanth),
+    Latimeria menadoensis (Indonesian coelacanth) Diet: Carnivore Lifespan:  Around
+    100 years Class: Sarcopterygii'
+  fishImage: {fileID: -359343112, guid: 8b488d96d4a513b46b6500e628207318, type: 3}
+  fishFacts:
+  - title: '"Living Fossil"'
+    description: Coelacanths are often called "living fossils" because they were
+      believed to have gone extinct around 66 million years ago until one was discovered
+      alive in 1938. They have remained largely unchanged for over 400 million years,
+      predating dinosaurs.
+  - title: Lobed Fins and Evolutionary Significance
+    description: Coelacanths have lobed fins that are supported by bones, resembling
+      the limb structure of early tetrapods (four-limbed vertebrates). This makes
+      them an important link in studying the evolutionary transition from fish to
+      land animals.
+  - title: Deep-Sea Dwellers
+    description: "Coelacanths inhabit depths of 500\u2013800 meters in underwater
+      caves and volcanic slopes. They prefer low-light environments and use their
+      unique rostral organ (in their snout) to detect faint electrical signals from
+      prey in the dark."
+  - title: Incredibly Slow Reproduction
+    description: Coelacanths have an unusually long gestation period of about 5 years,
+      one of the longest known in any vertebrate. They give birth to live young (ovoviviparous),
+      and their reproductive rate is extremely low, contributing to their endangered
+      status.
+  - title: Unique "Hinged" Jaw
+    description: Coelacanths have a secondary hinge in their jaw, allowing them to
+      open their mouths wider and consume larger prey. This adaptation is rare among
+      fish and helps them feed efficiently in their deep-sea habitat.
+  dataUnlocked: 0000000000

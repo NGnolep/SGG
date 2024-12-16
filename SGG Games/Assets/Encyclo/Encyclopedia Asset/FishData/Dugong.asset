@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b12b2b5d65bcaa40a83530a7a44c478, type: 3}
+  m_Name: Dugong
+  m_EditorClassIdentifier: 
+  fishName: Dugong
+  fishDescription: "Scientific Name: Dugong dugon Diet: Herbivore Lifespan: 50\u201370
+    years Class: Mammalia"
+  fishImage: {fileID: 1349941980, guid: 07fdf4cac94c2d14fbe2c9ec1babcaa6, type: 3}
+  fishFacts:
+  - title: Marine Herbivores
+    description: Dugongs are the only strictly herbivorous marine mammals, feeding
+      exclusively on seagrass. They are sometimes called "sea cows" because they
+      graze in underwater meadows much like cows graze on land.
+  - title: Closest Relative to Elephants
+    description: Despite their aquatic lifestyle, dugongs are closely related to
+      elephants. Both belong to the order Sirenia and share traits like bristle-like
+      hairs on their bodies and similar tooth structure.
+  - title: Slow Reproduction
+    description: "Dugongs have a very low reproductive rate, with females giving
+      birth to a single calf every 3\u20137 years. This, combined with habitat loss,
+      makes them vulnerable to population decline."
+  - title: Lifespan and Size
+    description: "Dugongs can live up to 70 years, reaching lengths of 2.5\u20133
+      meters (8\u201310 feet) and weighing around 250\u2013300 kg (550\u2013660 pounds).
+      Their slow growth and long lifespan make them dependent on stable ecosystems."
+  - title: Mythical Inspiration
+    description: Dugongs are thought to have inspired ancient sailor legends about
+      mermaids. Their graceful movements and human-like nursing behavior may have
+      contributed to these myths.
+  dataUnlocked: 0000000000

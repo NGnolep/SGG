@@ -134,7 +134,7 @@ public class RadarController : MonoBehaviour
         // Locations text for the fish's new position
         currentFishLocation = buttonLabels[randomIndex]; // Store the current fish location
 
-        locationText.text = $"The creature is now {currentFishLocation}!";
+        locationText.text = $"The creature is now at {currentFishLocation}!";
         Debug.Log($"Fish relocated to: {currentFishLocation}");
     }
     public void OnMissedScan()
