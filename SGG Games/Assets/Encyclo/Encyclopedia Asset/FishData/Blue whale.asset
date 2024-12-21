@@ -16,6 +16,7 @@ MonoBehaviour:
   fishDescription: "Scientific Name: Balaenoptera musculus Diet:  Carnivore Lifespan:
     70\u201390 years Class: Mammalia"
   fishImage: {fileID: -518972383, guid: f52906a534832334f9b9a2680cdd46cc, type: 3}
+  lockedImage: {fileID: 1354807786, guid: 052a168af9bb8e946b05b7f78715d2ed, type: 3}
   fishFacts:
   - title: 'Largest Animal on Earth:'
     description: The blue whale is the largest animal to ever exist on Earth, surpassing

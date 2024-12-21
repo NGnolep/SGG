@@ -17,6 +17,7 @@ MonoBehaviour:
     Latimeria menadoensis (Indonesian coelacanth) Diet: Carnivore Lifespan:  Around
     100 years Class: Sarcopterygii'
   fishImage: {fileID: -359343112, guid: 8b488d96d4a513b46b6500e628207318, type: 3}
+  lockedImage: {fileID: -222290469, guid: b36d9e9fcee45924f9e1701acfe1e37a, type: 3}
   fishFacts:
   - title: '"Living Fossil"'
     description: Coelacanths are often called "living fossils" because they were

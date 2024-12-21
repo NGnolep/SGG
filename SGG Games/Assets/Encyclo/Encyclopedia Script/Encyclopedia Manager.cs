@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
@@ -17,8 +19,10 @@ public class EncyclopediaManager : MonoBehaviour
     public Button closeButton;
     public Image fishImage;
 
+    public GameObject encycloScreen;
+    public GameObject searchScreen;
     private int currentFishIndex = 0;
-
+    private RadarController radarController;
     void Start()
     {
         // Set up button listeners
@@ -42,9 +46,9 @@ public class EncyclopediaManager : MonoBehaviour
             FishDataScriptableObject currentFish = fishDataList[currentFishIndex];
 
             // Update fish name, description, and image
-            fishNameText.text = currentFish.fishName;
-            fishDescriptionText.text = currentFish.fishDescription;
-            fishImage.sprite = currentFish.fishImage;
+            fishNameText.text = "???";
+            fishDescriptionText.text = "???";
+            fishImage.sprite = currentFish.lockedImage;
 
             bool anyFactsUnlocked = false;
 
@@ -55,6 +59,12 @@ public class EncyclopediaManager : MonoBehaviour
                 {
                     factButtons[i].interactable = true;
                     anyFactsUnlocked = true;
+                    if (i == 0)
+                    {
+                        fishNameText.text = currentFish.fishName;
+                        fishDescriptionText.text = currentFish.fishDescription;
+                        fishImage.sprite = currentFish.fishImage; // Replace with the unlocked image
+                    }
                 }
                 else
                 {
@@ -89,9 +99,10 @@ public class EncyclopediaManager : MonoBehaviour
         }
     }
 
-    private void CloseEncyclopedia()
+    public void CloseEncyclopedia()
     {
-        gameObject.SetActive(false); // Deactivate the encyclopedia panel
+        encycloScreen.SetActive(false);
+        searchScreen.SetActive(true);
     }
 
     private void OnFactButtonPressed(int index)
@@ -107,13 +118,42 @@ public class EncyclopediaManager : MonoBehaviour
     }
 
     // Unlock a new fact for the current fish
-    public void UnlockFact(int factIndex)
+    public bool UnlockNextFact()
     {
         FishDataScriptableObject currentFish = fishDataList[currentFishIndex];
-        if (factIndex >= 0 && factIndex < currentFish.dataUnlocked.Length)
+
+        for (int i = 0; i < currentFish.dataUnlocked.Length; i++)
         {
-            currentFish.dataUnlocked[factIndex] = true;
-            UpdateEncyclopediaUI();
+            if (!currentFish.dataUnlocked[i])
+            {
+                currentFish.dataUnlocked[i] = true;
+                UpdateEncyclopediaUI();
+                return true; // Successfully unlocked a fact
+            }
         }
+
+        return false; // No more facts to unlock
+    }
+
+    public bool IsFishComplete(FishDataScriptableObject fish)
+    {
+        foreach (bool unlocked in fish.dataUnlocked)
+        {
+            if (!unlocked) return false;
+        }
+        return true;
+    }
+
+    public void MoveToNextFish()
+    {
+        // Generate a random index and ensure the fish is not fully unlocked
+        int randomIndex;
+        do
+        {
+            randomIndex = Random.Range(0, fishDataList.Length);
+        } while (IsFishComplete(fishDataList[randomIndex]));
+
+        currentFishIndex = randomIndex;
+        UpdateEncyclopediaUI();
     }
 }

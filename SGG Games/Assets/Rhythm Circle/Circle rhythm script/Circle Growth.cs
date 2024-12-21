@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using TMPro;
 
 public class CircleGrowth : MonoBehaviour
 {
@@ -8,9 +9,9 @@ public class CircleGrowth : MonoBehaviour
     public Transform outerCircle;
 
     [Header("Circle Settings")]
-    public float growSpeed = 0.8f;
-    public float perfectRange = 0.29f;
-    public float maxScaleThreshold = 1.1f;
+    private float growSpeed = 0.7f;
+    private float perfectRange = 0.2f;
+    private float maxScaleThreshold = 1.1f;
 
     [Header("Scoring")]
     public int scanned = 0;
@@ -20,7 +21,7 @@ public class CircleGrowth : MonoBehaviour
     private bool canScore = false;
     private bool hasMissed = false;
     private bool isGameOver = false;
-    private bool isActive = false; // To control when the script starts/stops
+    private bool isActive = false;
 
     [Header("Feedback")]
     public VisualFeedback visualFeedback;
@@ -29,17 +30,21 @@ public class CircleGrowth : MonoBehaviour
 
     public RadarController scanningManager;
     public EncyclopediaManager encyclopediaManager;
-
+    public GameObject feedbackTextPrefab;
+    public AudioClip hitSoundClip;
+    public AudioClip missSoundClip;
+    private AudioSource audioSource;
     void Start()
     {
         innerCircleRenderer = innerCircle.GetComponent<SpriteRenderer>();
+        audioSource = gameObject.AddComponent<AudioSource>();
         ResetCircle();
-        StopAllCoroutines(); // Prevent anything from starting until explicitly told to
+        StopAllCoroutines();
     }
 
     void Update()
     {
-        if (!isActive || isGameOver) return; // Ensure the script only runs when active
+        if (!isActive || isGameOver) return;
 
         if (innerCircle.localScale.x < outerCircle.localScale.x)
         {
@@ -59,7 +64,7 @@ public class CircleGrowth : MonoBehaviour
 
     public void StartRhythm()
     {
-        if (isActive) return; // Prevent multiple starts
+        if (isActive) return;
 
         isActive = true;
         isGameOver = false;
@@ -77,7 +82,7 @@ public class CircleGrowth : MonoBehaviour
         missScan = 0;
         isActive = false;
         StopAllCoroutines();
-        ResetCircle(); // Reset the circle when stopping
+        ResetCircle();
     }
 
     private void CheckForScore()
@@ -87,11 +92,12 @@ public class CircleGrowth : MonoBehaviour
         {
             scanned++;
             hasScored = true;
-            Debug.Log("Perfect");
+            PlayFeedback("Hit");
             if (scanned >= 10)
             {
+                EndGameFeedback(true);
                 scanningManager.RhythmComplete();
-                StopRhythm(); // Stop the rhythm game when the goal is reached
+                StopRhythm();
             }
         }
         else
@@ -106,16 +112,15 @@ public class CircleGrowth : MonoBehaviour
     {
         missScan++;
         hasMissed = true;
-        Debug.Log(message);
-
+        PlayFeedback("Miss");
         ResetCircle();
-        visualFeedback.ShowMiss();
 
         if (missScan >= 5)
         {
             isGameOver = true;
+            EndGameFeedback(false);
             scanningManager.OnMissedScan();
-            StopRhythm(); // Stop the rhythm game when too many misses occur
+            StopRhythm();
         }
     }
 
@@ -126,7 +131,7 @@ public class CircleGrowth : MonoBehaviour
         if (innerCircleRenderer != null)
         {
             Color resetColor = innerCircleRenderer.color;
-            resetColor.a = 1; // Fully transparent
+            resetColor.a = 1;
             innerCircleRenderer.color = resetColor;
         }
 
@@ -136,21 +141,24 @@ public class CircleGrowth : MonoBehaviour
         hasMissed = false;
         hasScored = false;
         visualFeedback.outerRenderer.material.color = visualFeedback.normalColor;
+        growSpeed = Random.Range(0.4f, 1f);
         StartCoroutine(StartGrowthDelay());
     }
+
     IEnumerator StartGrowthDelay()
     {
-        yield return new WaitForSeconds(0.5f); // Small delay before resuming growth
-        canScore = true; // Allow scoring again
+        yield return new WaitForSeconds(0.5f);
+        canScore = true;
     }
+
     IEnumerator FadeInInnerCircle()
     {
         Color startColor = innerCircleRenderer.color;
-        startColor.a = 0; // Start fully transparent
+        startColor.a = 0;
         innerCircleRenderer.color = startColor;
 
         Color targetColor = startColor;
-        targetColor.a = 1; // Fully visible
+        targetColor.a = 1;
         float elapsedTime = 0f;
 
         while (elapsedTime < fadeInDuration)
@@ -160,6 +168,112 @@ public class CircleGrowth : MonoBehaviour
             yield return null;
         }
 
-        innerCircleRenderer.color = targetColor; // Ensure it's fully visible
+        innerCircleRenderer.color = targetColor;
     }
+
+    private void PlayFeedback(string type)
+    {
+        if (type == "Hit")
+        {
+            if (hitSoundClip != null)
+            {
+                audioSource.PlayOneShot(hitSoundClip);
+            }
+
+            ShowFeedbackText("Hit!");
+        }
+        else if (type == "Miss")
+        {
+            if (missSoundClip != null)
+            {
+                audioSource.PlayOneShot(missSoundClip);
+            }
+
+            ShowFeedbackText("Miss!");
+        }
+    }
+
+    private void ShowFeedbackText(string message)
+    {
+        if (feedbackTextPrefab != null)
+        {
+            // Find the canvas
+            Canvas canvas = FindObjectOfType<Canvas>();
+            if (canvas == null)
+            {
+                Debug.LogError("Canvas not found!");
+                return;
+            }
+
+            // Instantiate the feedback text under the canvas
+            GameObject feedbackText = Instantiate(feedbackTextPrefab, canvas.transform);
+
+            // Configure the text component
+            TMP_Text feedbackTextComponent = feedbackText.GetComponent<TMP_Text>();
+            if (feedbackTextComponent != null)
+            {
+                feedbackTextComponent.text = message;
+            }
+
+            // Set a random position near the center
+            RectTransform feedbackRectTransform = feedbackText.GetComponent<RectTransform>();
+            if (feedbackRectTransform != null)
+            {
+                feedbackRectTransform.anchoredPosition = new Vector2(
+                    Random.Range(-250f, 250f), // Random X near center
+                    Random.Range(-250f, 250f) // Random Y near center
+                );
+            }
+
+            // Destroy the feedback text after 1 second
+            Destroy(feedbackText, 0.5f);
+        }
+    }
+
+    private void EndGameFeedback(bool isSuccess)
+    {
+        // Create and configure feedback text dynamically
+        CreateDynamicFeedbackText(isSuccess ? "Data Unlocked!" : "The fish ran away!");
+
+        // Deactivate the background after 1 secon
+    }
+
+    private void CreateDynamicFeedbackText(string message)
+    {
+        if (feedbackTextPrefab == null)
+        {
+            Debug.LogError("Feedback text prefab not assigned!");
+            return;
+        }
+
+        // Instantiate the text prefab as a child of the background
+        GameObject feedbackText = Instantiate(feedbackTextPrefab, FindObjectOfType<Canvas>().transform);
+
+        // Configure the text component
+        TMP_Text feedbackTextComponent = feedbackText.GetComponent<TMP_Text>();
+        if (feedbackTextComponent != null)
+        {
+            feedbackTextComponent.text = message;
+        }
+        else
+        {
+            Debug.LogError("TMP_Text component missing on feedback text prefab!");
+        }
+
+        // Adjust its position to be centered
+        RectTransform feedbackRectTransform = feedbackText.GetComponent<RectTransform>();
+        if (feedbackRectTransform != null)
+        {
+            feedbackRectTransform.anchoredPosition = Vector2.zero; // Centered in the background
+        }
+
+        // Destroy the dynamic text after 1 second
+        Destroy(feedbackText, 1.5f);
+    }
+
+    //private IEnumerator DeactivateBackgroundWithDelay(GameObject background, float delay)
+    //{
+        //yield return new WaitForSeconds(delay);
+        //background.SetActive(false);
+    //}
 }

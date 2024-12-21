@@ -6,11 +6,12 @@ using TMPro;
 public class RadarController : MonoBehaviour
 {
     public GameObject radar;
-    public float animationDuration = 5f;
+    public float animationDuration = 7f;
     [Range(0, 1)] public float successProbability = 1f;
 
     public GameObject rhythmGame;
     public GameObject searchScreen;
+    public GameObject encycloScreen;
 
     public Button[] locationButtons; // Array of buttons for location
     public Button scanButton;
@@ -20,9 +21,19 @@ public class RadarController : MonoBehaviour
     private bool isSuccess = false;
     private string currentFishLocation = "";
 
+    private SpinningLine spiningLine;
     private EncyclopediaManager encyclopediaManager;
     private bool isScanning = false;
     public CircleGrowth circleManager;
+    public HoverAnim buttonAnimation;
+    public HoverAnimS buttonAnimationS;
+    public HoverAnimKP buttonAnimationKP;
+    public HoverAnimT buttonAnimationT;
+    public AnimGo animGo;
+
+    public AudioSource audioSource;
+    public AudioClip clip;
+    public AudioClip radarBeep;
     void Start()
     {
         encyclopediaManager = FindObjectOfType<EncyclopediaManager>();
@@ -47,17 +58,25 @@ public class RadarController : MonoBehaviour
     }
     public void StartSearch()
     {
+
         if (isScanning) return;  // Prevent further clicks if already scanning
         isScanning = true;
+        StartCoroutine(WaitTwoSeconds());
 
         searchScreen.SetActive(false);
         radar.SetActive(true);
-
+        audioSource.PlayOneShot(radarBeep);
         StartCoroutine(RadarAnimation());
     }
 
+    private IEnumerator WaitTwoSeconds()
+    {
+        yield return new WaitForSeconds(1f);
+        // Code to execute after 2 seconds
+    }
     private IEnumerator RadarAnimation()
     {
+
         // Animate radar for the specified duration
         yield return new WaitForSeconds(animationDuration);
 
@@ -69,17 +88,21 @@ public class RadarController : MonoBehaviour
 
     private void EndSearch()
     {
-        radar.SetActive(false);
 
         Debug.Log("Scan result: " + (isSuccess ? "Success" : "Failure"));
 
         if (isSuccess)
         {
+            // spiningLine.ChangeToBlue();
+            radar.SetActive(false);
             StartRhythm();
         }
         else
         {
             Debug.Log("Scan failed! Try scanning again.");
+            // spiningLine.ChangeToRed();
+            radar.SetActive(false);
+
             // Reactivate the search screen
             searchScreen.SetActive(true);
             locationText.text = $"Scan failed! The creature is still at {currentFishLocation}. Press Scan to try again.";
@@ -113,16 +136,21 @@ public class RadarController : MonoBehaviour
         rhythmGame.SetActive(false);
         scanButton.gameObject.SetActive(false);
         searchScreen.SetActive(true);
+        
+        if (encyclopediaManager != null)
+        {
+            if (encyclopediaManager.UnlockNextFact())
+            {
+                Debug.Log("Fact unlocked!");
+            }
+        }
+
         RelocateFish();
+
         foreach (Button button in locationButtons)
         {
             button.interactable = true;
         }
-        // Notify EncyclopediaManager to unlock data
-        // if (encyclopediaManager != null)
-        // {
-        //     encyclopediaManager.CollectFishData();
-        // }
     }
 
     private void RelocateFish()
@@ -175,6 +203,7 @@ public class RadarController : MonoBehaviour
             Debug.Log("Fish found at this location, proceeding to scan...");
             locationText.text = $"The creature is at {trimmedButtonLabel}. Press Scan to continue!";
             scanButton.gameObject.SetActive(true); // Enable the scan button if the location is correct
+            buttonAnimation.OnClick();
         }
         else
         {
@@ -187,5 +216,38 @@ public class RadarController : MonoBehaviour
                 button.interactable = true;
             }
         }
+    }
+
+    public void Clicked()
+    {
+        audioSource.PlayOneShot(clip);
+        buttonAnimation.OnClick();
+    }
+    public void Clicked2()
+    {
+        audioSource.PlayOneShot(clip);
+        buttonAnimationS.OnClick();
+    }
+    public void Clicked3()
+    {
+        audioSource.PlayOneShot(clip);
+        buttonAnimationKP.OnClick();
+    }
+    public void Clicked4()
+    {
+        audioSource.PlayOneShot(clip);
+        buttonAnimationT.OnClick();
+    }
+
+    public void ClickedGo()
+    {
+        audioSource.PlayOneShot(clip);
+        animGo.OnClick();
+    }
+
+    public void OpenEncy()
+    {
+        searchScreen.SetActive(false);
+        encycloScreen.SetActive(true);
     }
 }

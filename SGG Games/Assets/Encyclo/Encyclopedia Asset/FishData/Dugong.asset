@@ -16,6 +16,7 @@ MonoBehaviour:
   fishDescription: "Scientific Name: Dugong dugon Diet: Herbivore Lifespan: 50\u201370
     years Class: Mammalia"
   fishImage: {fileID: 1349941980, guid: 07fdf4cac94c2d14fbe2c9ec1babcaa6, type: 3}
+  lockedImage: {fileID: 1743015740, guid: 8484fcae80ec9f9488f68ec595bb200e, type: 3}
   fishFacts:
   - title: Marine Herbivores
     description: Dugongs are the only strictly herbivorous marine mammals, feeding

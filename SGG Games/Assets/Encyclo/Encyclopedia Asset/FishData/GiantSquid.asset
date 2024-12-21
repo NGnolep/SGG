@@ -15,7 +15,8 @@ MonoBehaviour:
   fishName: Giant Squid
   fishDescription: 'Scientific Name: Architeuthis Diet: Carnivore Lifespan: 5-6 years
     Class: Cephalopod'
-  fishImage: {fileID: 0}
+  fishImage: {fileID: 989044235, guid: b2e427bfbb2823c45bc1df9616852098, type: 3}
+  lockedImage: {fileID: 1798029235, guid: e4e159486d82fa949aea09c42096edd7, type: 3}
   fishFacts:
   - title: Massive Size
     description: Giant squids can grow up to 40-50 feet (12-15 meters) in length,

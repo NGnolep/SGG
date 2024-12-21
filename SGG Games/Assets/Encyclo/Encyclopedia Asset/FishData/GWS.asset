@@ -16,6 +16,7 @@ MonoBehaviour:
   fishDescription: 'Scientific Name: Carcharodon carcharias Diet: Carnivore  Lifespan:
     >70 years Class: Chondrichthyes.'
   fishImage: {fileID: 423651318, guid: 220abd493381b6a4d80c65d5ed350d53, type: 3}
+  lockedImage: {fileID: -1745303993, guid: 4667424d59a7132409e3424eef23431a, type: 3}
   fishFacts:
   - title: Built for Long-Distance Travel
     description: Great White Sharks are known for their impressive migration abilities,

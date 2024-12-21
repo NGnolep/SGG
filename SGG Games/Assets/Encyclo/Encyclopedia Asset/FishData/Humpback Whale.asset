@@ -16,6 +16,7 @@ MonoBehaviour:
   fishDescription: "Scientific Name: Megaptera novaeangliae Diet: Carnivore Lifespan:
     80 \u2013 90 years Class: Mammal"
   fishImage: {fileID: -1773863163, guid: 28a5ff359e0835c4aa5f6c625f0327a2, type: 3}
+  lockedImage: {fileID: -1169182303, guid: cec82b49231ec6f4fbd51674bbae9676, type: 3}
   fishFacts:
   - title: Complex Songs
     description: Male humpback whales are known for their intricate songs, which

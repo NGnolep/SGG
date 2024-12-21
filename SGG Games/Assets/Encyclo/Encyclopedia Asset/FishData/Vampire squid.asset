@@ -15,7 +15,8 @@ MonoBehaviour:
   fishName: Vampire squid
   fishDescription: 'Scientific Name: Vampyroteuthis infernalis Diet: Detritivore
     Lifespan: 8 years (approximate) Class: Cephalopoda'
-  fishImage: {fileID: 0}
+  fishImage: {fileID: -264254195, guid: a10012d4abe32e745895e7481877d8b9, type: 3}
+  lockedImage: {fileID: -35404378, guid: 9505cc731e0b6134e9d6006660904f13, type: 3}
   fishFacts:
   - title: Not a True Squid or Octopus
     description: Despite its name, the vampire squid is neither a true squid nor

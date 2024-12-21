@@ -15,6 +15,7 @@ public class FishDataScriptableObject : ScriptableObject
     public string fishName;                // Fish name
     public string fishDescription;         // Fish description
     public Sprite fishImage;               // Fish image
+    public Sprite lockedImage;
     public Fact[] fishFacts = new Fact[5]; // Facts about the fish
     public bool[] dataUnlocked = new bool[5];  // Track unlocked facts
 }

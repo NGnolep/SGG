@@ -16,6 +16,7 @@ MonoBehaviour:
   fishDescription: 'Scientific Name: Chelonioidea Diet: Herbivores Lifespan: 50-100
     years Class: Reptiles'
   fishImage: {fileID: -543217142, guid: d337a6a9681dee742a492517e8dc79c3, type: 3}
+  lockedImage: {fileID: 1159856009, guid: 088085fe5ee5121489540784a5ad86ce, type: 3}
   fishFacts:
   - title: Ancient Lineage
     description: "Sea turtles have been around for more than 100 million years, meaning

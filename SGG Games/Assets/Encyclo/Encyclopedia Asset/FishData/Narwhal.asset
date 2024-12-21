@@ -16,6 +16,7 @@ MonoBehaviour:
   fishDescription: 'Scientific Name: Monodon monoceros Diet: Carnivore Lifespan:
     25-50 years Class: Mammalia'
   fishImage: {fileID: 1646928479, guid: e39fc6cfafc019145833ab06be92606a, type: 3}
+  lockedImage: {fileID: 789197985, guid: 78e453a76e06fbe49827daabe00313b7, type: 3}
   fishFacts:
   - title: Tooth or Tusk?
     description: Male narwhals have a long, spiraled tusk that can reach up to 10

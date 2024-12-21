@@ -157,7 +157,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 4f5483d7b2f7e054e9215d292ff0c706, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6d62a5fa8ad213e47a500bd4ea7f43f5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -322,15 +322,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   innerCircle: {fileID: 0}
   outerCircle: {fileID: 0}
-  growSpeed: 1
-  perfectRange: 0.29
-  maxScaleThreshold: 1.1
   scanned: 0
   missScan: 0
   visualFeedback: {fileID: 5807390181118145140}
   fadeInDuration: 0.8
   scanningManager: {fileID: 0}
   encyclopediaManager: {fileID: 0}
+  feedbackTextPrefab: {fileID: 0}
 --- !u!1 &9218972502512443999
 GameObject:
   m_ObjectHideFlags: 0

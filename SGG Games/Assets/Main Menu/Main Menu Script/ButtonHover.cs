@@ -1,84 +1,105 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using TMPro;
 using UnityEngine.UI;
+using System.Collections;
 
-public class ButtonHover : MonoBehaviour
+public class ButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [Header("UI References")]
-    public Image lineImage;           // Line to animate
+    public Image lineImage;           // The line that animates
     public TMP_Text hoverText;        // Text to display above the line
 
-    public float lineAnimationSpeed = 2f;  // Speed of the line animation
+    public string displayText;        // Customizable hover text for the button
+    public float lineAnimationSpeed = 2f;
+
+    private Coroutine currentAnimation;
     private bool isAnimating = false;
 
-    private Coroutine currentAnimation;    // Store current animation to stop it if needed
+    private RectTransform buttonRect;
 
     private void Start()
     {
         // Ensure line and text are hidden at the start
         lineImage.enabled = false;
         hoverText.enabled = false;
+
+        // Cache the button RectTransform
+        buttonRect = GetComponent<RectTransform>();
     }
 
-    public void OnButtonHover(Button button, string displayText)
+    public void OnPointerEnter(PointerEventData eventData)
     {
-        if (currentAnimation != null)
+        if (!isAnimating)
         {
-            StopCoroutine(currentAnimation); // Stop the previous animation
+            StartHover(displayText);
         }
-
-        currentAnimation = StartCoroutine(AnimateLine(button, displayText));
     }
 
-    public void OnButtonExit()
+    public void OnPointerExit(PointerEventData eventData)
     {
-        // Stop animation and reset UI
-        if (currentAnimation != null)
-        {
-            StopCoroutine(currentAnimation);
-        }
+        StopHover();
+    }
+
+    private void StartHover(string text)
+    {
+        if (currentAnimation != null) StopCoroutine(currentAnimation);
+
+        currentAnimation = StartCoroutine(AnimateLine(text));
+    }
+
+    private void StopHover()
+    {
+        if (currentAnimation != null) StopCoroutine(currentAnimation);
 
         isAnimating = false;
         lineImage.enabled = false;
         hoverText.enabled = false;
 
-        RectTransform lineRect = lineImage.rectTransform;
-        lineRect.sizeDelta = new Vector2(0, lineRect.sizeDelta.y);
+        // Reset line size
+        lineImage.rectTransform.sizeDelta = new Vector2(0, lineImage.rectTransform.sizeDelta.y);
     }
 
-    private IEnumerator AnimateLine(Button button, string displayText)
+    private IEnumerator AnimateLine(string text)
     {
         isAnimating = true;
 
         // Enable UI elements
         lineImage.enabled = true;
         hoverText.enabled = true;
-        hoverText.text = displayText;
+        hoverText.text = text;
 
-        RectTransform buttonRect = button.GetComponent<RectTransform>();
         RectTransform lineRect = lineImage.rectTransform;
 
-        // Start line position from bottom of button
-        Vector3 startPos = new Vector3(buttonRect.position.x, buttonRect.position.y - buttonRect.rect.height / 2, 0);
-        lineRect.position = startPos;
+        // Anchor the line to the bottom-left (left-to-right animation)
+        lineRect.anchorMin = new Vector2(0, 0.8f); // Start at the left edge
+        lineRect.anchorMax = new Vector2(0, 0.8f);
+        lineRect.pivot = new Vector2(0, 0.8f);
 
-        float targetWidth = Screen.width; // Full screen width
+        // Position the line below the button
+        Vector2 buttonPosition = buttonRect.anchoredPosition;
+        float buttonHeight = buttonRect.rect.height;
+        lineRect.anchoredPosition = new Vector2(buttonPosition.x, buttonPosition.y - buttonHeight / 2 - 10); // Offset below the button
+
+        // Target width: Go beyond the button width to stretch further
+        Canvas canvas = lineImage.canvas;
+        float targetWidth = canvas.pixelRect.width * 1.5f; // 1.5x the canvas width for extra stretch
+
         float currentWidth = 0;
 
+        // Animate line width from 0 to targetWidth
         while (currentWidth < targetWidth)
         {
             currentWidth += lineAnimationSpeed * Time.deltaTime * targetWidth;
             lineRect.sizeDelta = new Vector2(currentWidth, lineRect.sizeDelta.y);
 
-            // Update hover text position above the line
-            hoverText.rectTransform.position = new Vector3(startPos.x + currentWidth / 2, startPos.y + 20, 0);
+            // Position the hover text at the center of the line
+            hoverText.rectTransform.anchoredPosition = new Vector2(currentWidth / 8, lineRect.anchoredPosition.y + 40);
 
             yield return null;
         }
 
-        // Ensure it reaches the full width
         lineRect.sizeDelta = new Vector2(targetWidth, lineRect.sizeDelta.y);
+        isAnimating = false;
     }
 }

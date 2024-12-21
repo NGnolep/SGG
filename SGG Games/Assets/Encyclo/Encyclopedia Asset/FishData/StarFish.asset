@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b12b2b5d65bcaa40a83530a7a44c478, type: 3}
+  m_Name: StarFish
+  m_EditorClassIdentifier: 
+  fishName: StarFish
+  fishDescription: 'Scientific Name: Asterias Rubens Diet: Carnivore Lifespan: 10-34
+    Years Class: Asteroidea'
+  fishImage: {fileID: 1634744433, guid: 68526f25970075e40b1f791563598d69, type: 3}
+  lockedImage: {fileID: -1865500855, guid: 6f894de9289e4634a90bd3149bc9ad90, type: 3}
+  fishFacts:
+  - title: They Have No Brain or Blood
+    description: Starfish lack a centralized brain and blood. Instead, they rely
+      on a decentralized nerve network and a water vascular system. Their bodies
+      pump seawater to transport nutrients and oxygen.
+  - title: They Can Regenerate Arms (or Entire Bodies)
+    description: 'Starfish have remarkable regenerative abilities. If they lose an
+      arm, it can grow back. In some species, a severed arm can regenerate into a
+      whole new starfish, provided part of the central disc is intact. '
+  - title: They Have Hundreds of Tube Feet
+    description: The underside of a starfish is covered in tiny tube feet operated
+      by hydraulic pressure. These feet help them move, adhere to surfaces, and capture
+      prey, such as bivalves (clams and mussels).
+  - title: They Eat by Turning Their Stomach Inside Out
+    description: Starfish have a unique feeding method. They eject their stomachs
+      through their mouths to envelop and digest prey externally before pulling the
+      stomach back in.
+  - title: They Come in Many Shapes and Sizes
+    description: There are over 2,000 species of starfish worldwide, ranging in size
+      from less than an inch to over 3 feet in diameter. They also display a wide
+      range of colors and patterns, adapting to their environments and deterring
+      predators.
+  dataUnlocked: 0000000000
