@@ -1270,7 +1270,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radar: {fileID: 1613241745}
   animationDuration: 5
-  successProbability: 0.3
+  successProbability: 1
   rhythmGame: {fileID: 1990269259}
   searchScreen: {fileID: 904945963}
   encycloScreen: {fileID: 1999913228}
