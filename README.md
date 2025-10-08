@@ -30,10 +30,8 @@ Tides of Knowledge is a serious game that teaches about almost extinct animal in
 
 ## Developer & Contributions
 - Nhoel Goei (Game Programmer)
-- Clifftoven Wicaksono (Game Programmer)
-- Pieter Nathanael (Sound Artist)
-- Nelvin Anderson (Game Designer)
-- Felix Olivier (Game Artist)
+- Raditya Daryl Raspati (Game Designer)
+- Leonardi (Game Artist)
 <br>
 
 ```
