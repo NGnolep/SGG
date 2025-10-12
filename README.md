@@ -12,6 +12,7 @@
 ##  Scripts and Features
 
 A lot of feature in the game like items, sprinting, walking, hiding and so much more can be done thanks to tons of scripts that has been implemented to the game.<br>
+
 Here are some of the main mechanic in this game
 |  Script       | Description                                                  |
 | ------------------- | ------------------------------------------------------------ |
