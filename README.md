@@ -25,7 +25,7 @@ Here are some of the main mechanic in this game
 <br>
 
 ## About
-Tides of Knowledge is a serious game that teaches about almost extinct animal in the ocean it shows them the fact of those animals.
+Tides of Knowledge is a serious game that teaches about almost extinct animal in the ocean it shows them the fact of those animals. Player are task to discover this animals to learn about them so that they can know information about these animals.
 <br>
 
 ## Developer & Contributions
